@@ -1,209 +1,85 @@
-let mainBalance = document.getElementById('main-balance');
-let donatedBalance = document.getElementById('donate-balance');
-let donateAmount = document.getElementById('donate-amount');
-let donateBtn = document.getElementById('donate-btn');
-let feniBalance = document.getElementById('feni-balance');
-let feniAmount = document.getElementById('feni-amount');
-let feniBtn = document.getElementById('feni-btn');
-let quotaBalance = document.getElementById('quota-balance');
-let quotaAmount = document.getElementById('quota-amount');
-let quotaBtn = document.getElementById('quota-btn');
-let villageBalance = document.getElementById('village-balance');
-let villageAmount = document.getElementById('village-amount');
-let villageBtn = document.getElementById('village-btn');
+// Get all necessary DOM elements
+let mainBalance = document.getElementById("main-balance");
+let donatedBalance = document.getElementById("donate-balance");
+let donateAmount = document.getElementById("donate-amount");
+let donateBtn = document.getElementById("donate-btn");
+let feniBalance = document.getElementById("feni-balance");
+let feniAmount = document.getElementById("feni-amount");
+let feniBtn = document.getElementById("feni-btn");
+let quotaBalance = document.getElementById("quota-balance");
+let quotaAmount = document.getElementById("quota-amount");
+let quotaBtn = document.getElementById("quota-btn");
+let villageBalance = document.getElementById("village-balance");
+let villageAmount = document.getElementById("village-amount");
+let villageBtn = document.getElementById("village-btn");
+let historySection = document.getElementById("history-section");
+let donation = document.getElementById("donation");
+let history = document.getElementById("history");
 
-
-// donation in noakhali
-donateBtn.addEventListener("click", function () {
-  let donationAmountValue = parseFloat(donateAmount.value.trim());
-  if (isNaN(donationAmountValue) || donationAmountValue <= 0) {
+// Reusable function for handling donations
+function handleDonation(amountInput, balanceDisplay, causeBalanceDisplay, causeName) {
+  let amountValue = parseFloat(amountInput.value.trim());
+  if (isNaN(amountValue) || amountValue <= 0) {
     alert("Please enter a valid amount!");
     return;
   }
 
   let currentMainBalance = parseFloat(mainBalance.innerText);
-  if (donationAmountValue > currentMainBalance) {
+  if (amountValue > currentMainBalance) {
     alert("Insufficient balance!");
     return;
   }
 
   // Update balances
-  mainBalance.innerText = (currentMainBalance - donationAmountValue).toFixed(2);
-  donatedBalance.innerText =
-    (parseFloat(donatedBalance.innerText) + donationAmountValue).toFixed(2);
+  mainBalance.innerText = (currentMainBalance - amountValue);
+  causeBalanceDisplay.innerText = (parseFloat(causeBalanceDisplay.innerText) + amountValue);
 
-  // History section
-  let historySection = document.getElementById("history-section");
- 
+  // Add to history
   let div = document.createElement("article");
   div.classList.add("donation-entry", "shadow-md", "p-2");
 
-
   const h1 = document.createElement("h1");
   h1.classList.add("font-bold", "py-2");
-  h1.innerText = `${donationAmountValue} Taka is donated for Noakhali the flood people`;
+  h1.innerText = `${amountValue} Taka is donated for ${causeName} the flood people`;
   div.appendChild(h1);
-  console.log(h1)
 
   let p = document.createElement("p");
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  let options = { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" };
+  p.innerText = new Intl.DateTimeFormat("en-US", options).format(new Date());
   div.appendChild(p);
 
   historySection.appendChild(div);
 
-
-  // Clear input field
-  donateAmount.value = "";
+  // Clear input and show modal
+  amountInput.value = "";
   document.getElementById("my-modal-4").showModal();
+}
+
+// Event listeners for each donation button
+donateBtn.addEventListener("click", function () {
+  handleDonation(donateAmount, mainBalance, donatedBalance, "Noakhali");
 });
-
-
-// donation in feni
 
 feniBtn.addEventListener("click", function () {
-  let feniAmountValue = parseFloat(feniAmount.value);
-  if (isNaN(feniAmountValue) || feniAmountValue <= 0) {
-    alert("Please enter a valid amount!");
-    return;
-  }
-
-  let currentMainBalance = parseFloat(mainBalance.innerText);
-  if (feniAmountValue > currentMainBalance) {
-    alert("Insufficient balance!");
-    return;
-  }
-
-  // Update balances
-  mainBalance.innerText = (currentMainBalance - feniAmountValue);
-  feniBalance.innerText = (parseFloat(feniBalance.innerText) + feniAmountValue);
-
-  
-  // History section
-  let historySection = document.getElementById("history-section");
- 
-  let div = document.createElement("article");
-  div.classList.add("donation-entry", "shadow-md", "p-2");
-
-
-  const h1 = document.createElement("h1");
-  h1.classList.add("font-bold", "py-2");
-  h1.innerText = `${donationAmountValue} Taka is donated for Feni the flood people`;
-  div.appendChild(h1);
-  console.log(h1)
-
-  let p = document.createElement("p");
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
-  div.appendChild(p);
-
-  historySection.appendChild(div);
-
-  // Clear input field
-  feniAmount.value = "";
-  document.getElementById("my-modal-4").showModal();
+  handleDonation(feniAmount, mainBalance, feniBalance, "Feni");
 });
-
-// donation in quota
 
 quotaBtn.addEventListener("click", function () {
-  let quotaAmountValue = parseFloat(quotaAmount.value);
-  if (isNaN(quotaAmountValue) || quotaAmountValue <= 0) {
-    alert("Please enter a valid amount!");
-    return;
-  }
-
-  let currentMainBalance = parseFloat(mainBalance.innerText);
-  if (quotaAmountValue > currentMainBalance) {
-    alert("Insufficient balance!");
-    return;
-  }
-
-  // Update balances
-  mainBalance.innerText = (currentMainBalance - quotaAmountValue);
-  quotaBalance.innerText = (parseFloat(quotaBalance.innerText) + quotaAmountValue);
-
-  
-  // History section
-  let historySection = document.getElementById("history-section");
- 
-  let div = document.createElement("article");
-  div.classList.add("donation-entry", "shadow-md", "p-2");
-
-
-  const h1 = document.createElement("h1");
-  h1.classList.add("font-bold", "py-2");
-  h1.innerText = `${donationAmountValue} Taka is donated for Quota the flood people`;
-  div.appendChild(h1);
-  console.log(h1)
-
-  let p = document.createElement("p");
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
-  div.appendChild(p);
-
-  historySection.appendChild(div);
-
-  // Clear input field
-  quotaAmount.value = "";
-  document.getElementById("my-modal-4").showModal();
+  handleDonation(quotaAmount, mainBalance, quotaBalance, "Quota");
 });
 
-
-// donation in village
-
 villageBtn.addEventListener("click", function () {
-  let villageAmountValue = parseFloat(villageAmount.value);
-  if (isNaN(villageAmountValue) || villageAmountValue <= 0) {
-    alert("Please enter a valid amount!");
-    return;
-  }
-
-  let currentMainBalance = parseFloat(mainBalance.innerText);
-  if (villageAmountValue > currentMainBalance) {
-    alert("Insufficient balance!");
-    return;
-  }
-
-  // Update balances
-  mainBalance.innerText = (currentMainBalance - villageAmountValue);
-  villageBalance.innerText = (parseFloat(villageBalance.innerText) + villageAmountValue);
-
-  
-  // History section
-  let historySection = document.getElementById("history-section");
- 
-  let div = document.createElement("article");
-  div.classList.add("donation-entry", "shadow-md", "p-2");
-
-
-  const h1 = document.createElement("h1");
-  h1.classList.add("font-bold", "py-2");
-  h1.innerText = `${donationAmountValue} Taka is donated for Noakhali the flood people`;
-  div.appendChild(h1);
-  console.log(h1)
-
-  let p = document.createElement("p");
-  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
-  div.appendChild(p);
-
-  historySection.appendChild(div);
-
-  // Clear input field
-  villageAmount.value = "";
-  document.getElementById("my-modal-4").showModal();
+  handleDonation(villageAmount, mainBalance, villageBalance, "Village");
 });
 
 // Toggle between donation and history views
-let donation = document.getElementById("donation");
-let history = document.getElementById("history");
 history.addEventListener("click", function () {
   history.classList.add("bg-lime-400", "font-semibold");
   donation.classList.remove("bg-lime-400", "font-semibold");
   document.getElementById("main").classList.add("hidden");
   document.getElementById("history-section").classList.remove("hidden");
 });
+
 donation.addEventListener("click", function () {
   history.classList.remove("bg-lime-400", "font-semibold");
   donation.classList.add("bg-lime-400", "font-semibold");
