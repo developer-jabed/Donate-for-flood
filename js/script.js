@@ -29,31 +29,29 @@ donateBtn.addEventListener("click", function () {
 
   // Update balances
   mainBalance.innerText = (currentMainBalance - donationAmountValue).toFixed(2);
-  donatedBalance.innerText = 
+  donatedBalance.innerText =
     (parseFloat(donatedBalance.innerText) + donationAmountValue).toFixed(2);
 
   // History section
   let historySection = document.getElementById("history-section");
-  if (!historySection) {
-    console.error("History section element not found!");
-    return;
-  }
-  
+ 
   let div = document.createElement("article");
   div.classList.add("donation-entry", "shadow-md", "p-2");
-  
-  let h1 = document.createElement("h1");
+
+
+  const h1 = document.createElement("h1");
   h1.classList.add("font-bold", "py-2");
-  h1.innerText = `${donationAmountValue} Taka is donated for Bangladeshi the flood people`;
+  h1.innerText = `${donationAmountValue} Taka is donated for Noakhali the flood people`;
   div.appendChild(h1);
-  
+  console.log(h1)
+
   let p = document.createElement("p");
   let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
   p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
   div.appendChild(p);
-  
+
   historySection.appendChild(div);
-  
+
 
   // Clear input field
   donateAmount.value = "";
@@ -80,6 +78,27 @@ feniBtn.addEventListener("click", function () {
   mainBalance.innerText = (currentMainBalance - feniAmountValue);
   feniBalance.innerText = (parseFloat(feniBalance.innerText) + feniAmountValue);
 
+  
+  // History section
+  let historySection = document.getElementById("history-section");
+ 
+  let div = document.createElement("article");
+  div.classList.add("donation-entry", "shadow-md", "p-2");
+
+
+  const h1 = document.createElement("h1");
+  h1.classList.add("font-bold", "py-2");
+  h1.innerText = `${donationAmountValue} Taka is donated for Feni the flood people`;
+  div.appendChild(h1);
+  console.log(h1)
+
+  let p = document.createElement("p");
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  div.appendChild(p);
+
+  historySection.appendChild(div);
+
   // Clear input field
   feniAmount.value = "";
   document.getElementById("my-modal-4").showModal();
@@ -103,6 +122,27 @@ quotaBtn.addEventListener("click", function () {
   // Update balances
   mainBalance.innerText = (currentMainBalance - quotaAmountValue);
   quotaBalance.innerText = (parseFloat(quotaBalance.innerText) + quotaAmountValue);
+
+  
+  // History section
+  let historySection = document.getElementById("history-section");
+ 
+  let div = document.createElement("article");
+  div.classList.add("donation-entry", "shadow-md", "p-2");
+
+
+  const h1 = document.createElement("h1");
+  h1.classList.add("font-bold", "py-2");
+  h1.innerText = `${donationAmountValue} Taka is donated for Quota the flood people`;
+  div.appendChild(h1);
+  console.log(h1)
+
+  let p = document.createElement("p");
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  div.appendChild(p);
+
+  historySection.appendChild(div);
 
   // Clear input field
   quotaAmount.value = "";
@@ -128,6 +168,27 @@ villageBtn.addEventListener("click", function () {
   // Update balances
   mainBalance.innerText = (currentMainBalance - villageAmountValue);
   villageBalance.innerText = (parseFloat(villageBalance.innerText) + villageAmountValue);
+
+  
+  // History section
+  let historySection = document.getElementById("history-section");
+ 
+  let div = document.createElement("article");
+  div.classList.add("donation-entry", "shadow-md", "p-2");
+
+
+  const h1 = document.createElement("h1");
+  h1.classList.add("font-bold", "py-2");
+  h1.innerText = `${donationAmountValue} Taka is donated for Noakhali the flood people`;
+  div.appendChild(h1);
+  console.log(h1)
+
+  let p = document.createElement("p");
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  div.appendChild(p);
+
+  historySection.appendChild(div);
 
   // Clear input field
   villageAmount.value = "";
