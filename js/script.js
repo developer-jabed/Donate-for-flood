@@ -15,7 +15,7 @@ let villageBtn = document.getElementById('village-btn');
 
 // donation in noakhali
 donateBtn.addEventListener("click", function () {
-  let donationAmountValue = parseFloat(donateAmount.value);
+  let donationAmountValue = parseFloat(donateAmount.value.trim());
   if (isNaN(donationAmountValue) || donationAmountValue <= 0) {
     alert("Please enter a valid amount!");
     return;
@@ -28,14 +28,38 @@ donateBtn.addEventListener("click", function () {
   }
 
   // Update balances
-  mainBalance.innerText = (currentMainBalance - donationAmountValue);
-  donatedBalance.innerText = (parseFloat(donatedBalance.innerText) + donationAmountValue);
+  mainBalance.innerText = (currentMainBalance - donationAmountValue).toFixed(2);
+  donatedBalance.innerText = 
+    (parseFloat(donatedBalance.innerText) + donationAmountValue).toFixed(2);
+
+  // History section
+  let historySection = document.getElementById("history-section");
+  if (!historySection) {
+    console.error("History section element not found!");
+    return;
+  }
+  
+  let div = document.createElement("article");
+  div.classList.add("donation-entry", "shadow-md", "p-2");
+  
+  let h1 = document.createElement("h1");
+  h1.classList.add("font-bold", "py-2");
+  h1.innerText = `${donationAmountValue} Taka is donated for Bangladeshi the flood people`;
+  div.appendChild(h1);
+  
+  let p = document.createElement("p");
+  let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  p.innerText = new Intl.DateTimeFormat('en-US', options).format(new Date());
+  div.appendChild(p);
+  
+  historySection.appendChild(div);
+  
 
   // Clear input field
   donateAmount.value = "";
-  alert("Donation Successful!");
-  
+  document.getElementById("my-modal-4").showModal();
 });
+
 
 // donation in feni
 
@@ -58,7 +82,7 @@ feniBtn.addEventListener("click", function () {
 
   // Clear input field
   feniAmount.value = "";
-  alert("Donation Successful!");
+  document.getElementById("my-modal-4").showModal();
 });
 
 // donation in quota
@@ -82,7 +106,7 @@ quotaBtn.addEventListener("click", function () {
 
   // Clear input field
   quotaAmount.value = "";
-  alert("Donation Successful!");
+  document.getElementById("my-modal-4").showModal();
 });
 
 
@@ -107,7 +131,7 @@ villageBtn.addEventListener("click", function () {
 
   // Clear input field
   villageAmount.value = "";
-  alert("Donation Successful!");
+  document.getElementById("my-modal-4").showModal();
 });
 
 // Toggle between donation and history views
